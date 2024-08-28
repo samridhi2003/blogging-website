@@ -14,11 +14,11 @@ export const BlogCard = ({
     content,
     publishedDate
 }: BlogCardProps) => {
-    return ( <Link to={`/blog/${id}`}>
+    return (<Link to={`/blog/${id}`}>
         <div className="border-b border-slate-200 p-4 pb-4 w-screen max-w-screen-md cursor-pointer">
             <div className="flex">
                 <div className="flex justify-center flex-col">
-                    <Avatar  name={authorName} />
+                    <Avatar name={authorName} size="small" />
                 </div>
                 <div className="font-extralight pl-2 text-sm flex justify-center flex-col">{authorName}</div>
                 <div className="flex justify-center flex-col pl-2"><Circle /></div>
@@ -36,14 +36,14 @@ export const BlogCard = ({
                 {`${Math.ceil(content.length / 100)} minute(s) read`}
             </div>
         </div>
-        </Link>
+    </Link>
     )
 }
 export function Circle() {
     return <div className="h-1 w-1 rounded-full bg-slate-500"></div>
 }
-export function Avatar({ name,size="small" }: { name: string, size:"small"| "big" }) {
-    return <div className={`${size==="small"? "text-xs" : "text-md"} relative inline-flex items-center justify-center ${size=== "small"? "w-6 h-6" : "w-10 h-10"} overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600`}>
+export function Avatar({ name, size = "small" }: { name: string, size: "small" | "big" }) {
+    return <div className={`${size === "small" ? "text-xs" : "text-md"} relative inline-flex items-center justify-center ${size === "small" ? "w-6 h-6" : "w-10 h-10"} overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600`}>
         <span className={`text-xs font-extralight text-gray-600 dark:text-gray-300`}>{name[0]}</span>
     </div>
 }
