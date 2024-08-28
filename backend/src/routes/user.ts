@@ -12,7 +12,7 @@ export const userRouter = new Hono<{
   }
 }>();
 
-userRouter.post('/signup', async (c) => {ç
+userRouter.post('/signup', async (c) => {
 
   console.log("ho01", c.env.DATABASE_URL)
 
@@ -37,9 +37,7 @@ userRouter.post('/signup', async (c) => {ç
     })
     console.log(user)
     const token = await sign({ id: user.id }, c.env.JWT_SECRET)
-    return c.json({
-      jwt: token
-    })
+    return c.text(token);
   } catch (e) {
     console.log(e)
     c.status(411);
@@ -70,8 +68,9 @@ userRouter.post('/signin', async (c) => {
       return c.json({ error: "user not found" });
     }
     const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
-    return c.json({ jwt });
+    return c.text(jwt);
   } catch (e) {
+    console.log(e)
     c.status(411);
     return c.text('Invalid');
   }
