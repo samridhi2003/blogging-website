@@ -2,17 +2,21 @@ import { Hono } from 'hono'
 import { userRouter } from './routes/user'
 import { blogRouter } from './routes/blog';
 import { cors } from 'hono/cors';
+import { ai } from './utils/ai';
+
 
 const app = new Hono<{
   Bindings: {
     DATABASE_URL: string
     JWT_SECRET: string
+    HF_API_TOKEN : string
   }
 }>()
 
 app.use('/api/*', cors())
 app.route("/api/v1/user", userRouter);
 app.route("/api/v1/blog", blogRouter);
+app.route("/api/v1/ai", ai);
 
 // app.use('/api/v1/blog/*', async (c, next)=>{
 //   const header= c.req.header("Authorization");
@@ -30,6 +34,6 @@ app.route("/api/v1/blog", blogRouter);
 //     await next()
 //   })
 
-
+console.log('/api/v1/ai/generate');
 
 export default app

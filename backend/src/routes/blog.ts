@@ -18,7 +18,6 @@ export const blogRouter = new Hono<{
 blogRouter.use("/*", async (c, next) => {
     const authHeader = c.req.header("authorization") || "";
     const token = authHeader.split(' ')[1]
-    console.log(token);
     try {
         const user = await verify(token, c.env.JWT_SECRET);
         if (user) {
@@ -45,7 +44,7 @@ blogRouter.use("/*", async (c, next) => {
 
 blogRouter.post('/', async (c, next) => {
     const body = await c.req.json();
-    const authorId = c.get("userId")
+    const authorId = c.get("userId");
     const { success } = createBlogInput.safeParse(body);
     if (!success) {
         c.status(411);
