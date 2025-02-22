@@ -2,7 +2,8 @@
   "name": "backend",
   "scripts": {
     "dev": "wrangler dev src/index.ts",
-    "deploy": "wrangler deploy --minify src/index.ts"
+    "deploy": "wrangler deploy --minify src/index.ts",
+    "db:generate":"cd packages/db && npx prisma migrate && cd ../.."
   },
   "dependencies": {
     "@cohort-projects/medium-common": "^1.0.4",
